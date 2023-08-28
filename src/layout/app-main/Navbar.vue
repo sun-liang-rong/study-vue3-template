@@ -57,13 +57,13 @@ const toggleSideBar = () => {
 //退出登录
 const router = useRouter()
 const loginOut = () => {
-  loginOutReq().then(()=>{
+  // loginOutReq().then(()=>{
     elMessage('退出登录成功')
     router.push(`/login?redirect=/`)
     nextTick(() => {
       resetState()
     })
-  })
+  // })
 }
 </script>
 

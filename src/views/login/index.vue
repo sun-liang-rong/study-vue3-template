@@ -4,12 +4,12 @@
       <div class="title-container">
         <h3 class="title text-center">{{ settings.title }}</h3>
       </div>
-      <el-form-item prop="keyword" :rules="formRules.isNotNull('usename不能为空')">
+      <el-form-item prop="username" :rules="formRules.isNotNull('usename不能为空')">
         <div class="rowSC">
           <span class="svg-container">
             <svg-icon icon-class="user" />
           </span>
-          <el-input v-model="subForm.keyword" placeholder="用户名(admin)" />
+          <el-input v-model="subForm.username" placeholder="用户名(admin)" />
           <!--占位-->
           <div class="show-pwd" />
         </div>
@@ -55,8 +55,8 @@ const { settings } = useBasicStore()
 const formRules = useElement().formRules
 //form
 const subForm = reactive({
-  keyword: 'panda',
-  password: '123456'
+  username: 'slr',
+  password: '12345678'
 })
 const state = reactive({
   otherQuery: {},
@@ -100,13 +100,16 @@ const router = useRouter()
 const basicStore = useBasicStore()
 
 const loginFunc = () => {
+  console.log(subForm)
   loginReq(subForm)
       .then(({ data }) => {
+        console.log(data)
         elMessage('登录成功')
         basicStore.setToken(data?.jwtToken)
         router.push('/')
       })
       .catch((err) => {
+        console.log(err)
         tipMessage.value = err?.msg
       })
       .finally(() => {

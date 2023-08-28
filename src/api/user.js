@@ -1,4 +1,4 @@
-import axiosReq from 'axios'
+import axiosReq from '../utils/axios-req'
 // export const userInfoReq = (): Promise<any> => {
 //   return new Promise((resolve) => {
 //     const reqConfig = {
@@ -15,8 +15,8 @@ import axiosReq from 'axios'
 //登录
 export const loginReq = (subForm) => {
   return axiosReq({
-    url: '/mock/login',
-    params: subForm,
+    url: '/user/login',
+    data: subForm,
     method: 'post'
   })
 }
@@ -25,6 +25,31 @@ export const loginReq = (subForm) => {
 export const loginOutReq = () => {
   return axiosReq({
     url: '/mock/loginOut',
+    method: 'post'
+  })
+}
+
+//添加角色
+
+export const getRole = (data) => {
+  return axiosReq({
+    url: '/user/getRole',
+    method: 'post',
+    data
+  })
+}
+
+export const addRole = (data) => {
+  return axiosReq({
+    url: '/user/addRole',
+    method: 'post',
+    data
+  })
+}
+
+export const userList = () => {
+  return axiosReq({
+    url: '/user/userList',
     method: 'post'
   })
 }

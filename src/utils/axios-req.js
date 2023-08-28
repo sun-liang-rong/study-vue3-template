@@ -3,7 +3,10 @@ import { ElLoading, ElMessage, ElMessageBox } from 'element-plus'
 import { useBasicStore } from '@/store/basic'
 
 //使用axios.create()创建一个axios请求实例
-const service = axios.create()
+const service = axios.create({
+  baseURL: import.meta.env.VITE_PROXY_BASE_URL,
+})
+console.log(import.meta.env.VITE_PROXY_BASE_URL, '------------')
 let loadingInstance = null //loading实例
 let tempReqUrlSave = ''
 let authorTipDoor = true
@@ -66,31 +69,33 @@ service.interceptors.response.use(
     if (loadingInstance) {
       loadingInstance && loadingInstance.close()
     }
+    console.log(res.data, 'res.data')
     //download file
     if (res.data?.type?.includes("sheet")) {
       return res
     }
-    const { code, msg } = res.data
+    const { codeStatus, message } = res.data
+    console.log(codeStatus, message, 'codeStatus, message')
     const successCode = [0,200,20000]
     const noAuthCode = [401,403]
-    if (successCode.includes(code)) {
+    if (successCode.includes(codeStatus)) {
       return res.data
     } else {
       //authorTipDoor 防止多个请求 多次alter
       if (authorTipDoor) {
-        if (noAuthCode.includes(code)) {
+        if (noAuthCode.includes(codeStatus)) {
           noAuthDill()
         } else {
           // @ts-ignore
           if (!res.config?.isNotTipErrorMsg) {
             ElMessage.error({
-              message: msg,
+              message: message,
               duration: 2 * 1000
             })
           } else {
             return res
           }
-          return Promise.reject(msg)
+          return Promise.reject(message)
         }
       }
     }

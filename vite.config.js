@@ -19,7 +19,7 @@ import vitePluginSetupExtend from './src/plugins/vite-plugin-setup-extend/index'
 
 export default defineConfig(({ command, mode }) => {
   const env = loadEnv(mode, process.cwd(), '') //获取环境变量
-
+  console.log(env.VITE_PROXY_BASE_URL, env.VITE_PROXY_URL)
   return {
     base: setting.viteBasePath,
     define: {
@@ -65,17 +65,17 @@ export default defineConfig(({ command, mode }) => {
         symbolId: 'icon-[dir]-[name]'
       }),
       //https://github.com/anncwb/vite-plugin-mock/blob/HEAD/README.zh_CN.md
-      viteMockServe({
-        supportTs: true,
-        mockPath: 'mock',
-        localEnabled: command === 'serve',
-        prodEnabled: prodMock,
-        injectCode: `
-          import { setupProdMockServer } from './mock-prod-server';
-          setupProdMockServer();
-        `,
-        logger: true
-      }),
+      // viteMockServe({
+      //   supportTs: true,
+      //   mockPath: 'mock',
+      //   localEnabled: command === 'serve',
+      //   prodEnabled: prodMock,
+      //   injectCode: `
+      //     import { setupProdMockServer } from './mock-prod-server';
+      //     setupProdMockServer();
+      //   `,
+      //   logger: true
+      // }),
       // VueSetupExtend(),using  DefineOptions instant of it
       //https://github.com/antfu/unplugin-auto-import/blob/HEAD/src/types.ts
       Components({
@@ -133,6 +133,6 @@ export default defineConfig(({ command, mode }) => {
     optimizeDeps: {
       //include: [...optimizeDependencies,...optimizeElementPlus] //on-demand element-plus use this
       include: ['moment-mini']
-    }
+    },
   }
 })
