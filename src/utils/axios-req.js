@@ -89,7 +89,7 @@ service.interceptors.response.use(
           // @ts-ignore
           if (!res.config?.isNotTipErrorMsg) {
             ElMessage.error({
-              message: message,
+              message,
               duration: 2 * 1000
             })
           } else {

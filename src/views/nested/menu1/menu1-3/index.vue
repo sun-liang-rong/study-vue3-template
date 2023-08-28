@@ -28,8 +28,8 @@ interface tableDataTypes {
   name: string
   description: string
 }
-import { ref, reactive } from 'vue'
-import { getRole, addRole } from '@/api/user'
+import { reactive, ref } from 'vue'
+import { addRole, getRole } from '@/api/user'
 import { elMessage } from '@/hooks/use-element'
 import { ElMessageBox } from 'element-plus'
 const dialogVisible = ref(false)
@@ -38,7 +38,7 @@ const formLabelAlign = reactive({
   name: '',
   region: ''
 })
-let tableData = reactive< tableDataTypes []>([
+const tableData = reactive< tableDataTypes []>([
 
 ])
 const getRoleList = () => {

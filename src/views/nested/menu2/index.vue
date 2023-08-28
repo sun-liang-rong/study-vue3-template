@@ -35,8 +35,8 @@ interface tableDataTypes {
   name: string
   description: string
 }
-import { ref, reactive } from 'vue'
-import { getRole, addRole, userList } from '@/api/user'
+import { reactive, ref } from 'vue'
+import { addRole, getRole, userList } from '@/api/user'
 import { elMessage } from '@/hooks/use-element'
 import { ElMessageBox } from 'element-plus'
 const dialogVisible = ref(false)
@@ -51,7 +51,7 @@ const getUserList = () => {
   })
 }
 getUserList()
-let tableData = reactive< tableDataTypes []>([
+const tableData = reactive< tableDataTypes []>([
 
 ])
 const getRoleList = () => {
