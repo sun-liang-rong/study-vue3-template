@@ -58,6 +58,27 @@ export const constantRoutes = [
     ]
   },
   {
+    path: '/role',
+    component: Layout,
+    redirect: '/role/account',
+    name: 'Role',
+    meta: { title: 'Role', icon: 'role-user' },
+    children: [
+      {
+        path: 'account',
+        component: () => import('@/views/role/account/index.vue'),
+        name: 'Account',
+        meta: { title: 'Account' }
+      },
+      {
+        path: 'authority',
+        component: () => import('@/views/role/authority/index.vue'),
+        name: 'Authority',
+        meta: { title: 'Authority'}
+      }
+    ]
+  },
+  {
     path: '/nested',
     component: Layout,
     redirect: '/nested/menu1',

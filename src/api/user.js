@@ -53,3 +53,18 @@ export const userList = () => {
     method: 'post'
   })
 }
+//获取所有角色
+export const getRoleList = () => {
+  return axiosReq({
+    url: '/user/getAllRole',
+    method: 'post'
+  })
+}
+//往用户身上添加角色
+export const addUserRole = (data) => {
+  return axiosReq({
+    url: '/user/addUserRole',
+    method: 'post',
+    data
+  })
+}

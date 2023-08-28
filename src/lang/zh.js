@@ -7,7 +7,9 @@ export default {
     'Error Log': '错误日志',
     'Error Index': '错误日志列表',
     'Error Generator': '错误日志生成',
-
+    Role: '用户管理',
+    Account: '账号管理',
+    Authority: '权限管理',
     Nested: '路由嵌套',
     Menu1: '菜单1',
     'Menu1-1': '菜单 1-1',

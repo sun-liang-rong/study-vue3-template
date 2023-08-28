@@ -168,6 +168,7 @@ const closeSelectedTag = (view) => {
 
 //刷新标签
 const refreshSelectedTag = (view) => {
+  console.log(view)
   const { fullPath } = view
   nextTick(() => {
     router.replace({

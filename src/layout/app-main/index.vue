@@ -4,24 +4,30 @@
       <!--has transition  setting by settings.mainNeedAnimation-->
       <transition v-if="settings.mainNeedAnimation" name="fade-transform" mode="out-in">
         <keep-alive :include="cachedViews">
-          <component :is="Component" :key="key" />
+          <div>
+          <component :is="Component" :key="route.name"/>
+        </div>
         </keep-alive>
       </transition>
       <!-- no transition -->
-      <keep-alive v-else :include="cachedViews">
-        <component :is="Component" :key="key" />
+      
+        <div v-else>
+          <keep-alive :include="cachedViews">
+        <component :is="Component" :key="route.name"/>
       </keep-alive>
+        </div>
     </router-view>
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import settings from "@/settings"
 import { watch } from 'vue'
 import { storeToRefs } from 'pinia/dist/pinia'
 import { useRoute } from 'vue-router'
 import { useBasicStore } from '@/store/basic'
 const { cachedViews } = storeToRefs(useBasicStore())
+console.log(cachedViews,'cachedViews')
 const route = useRoute()
 let oldRoute = {}
 let cacheGroup = []
@@ -32,6 +38,7 @@ watch(
     () => {
       //缓存组处理
       //first judge cacheGroup and then remove
+      console.log(route.name, 'route.name', cacheGroup, cachedViews)
       if (cacheGroup.length) {
         if (!cacheGroup.includes(route.name)) {
           cacheGroup.forEach((item) => {

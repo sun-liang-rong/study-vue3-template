@@ -56,6 +56,7 @@ const pathCompile = (path) => {
 const router = useRouter()
 //如果有redirect地址直接跳转，没有跳转path
 const handleLink = (item) => {
+  console.log(item, '----->')
   const { redirect, path } = item
   if (redirect) {
     router.push(redirect)
