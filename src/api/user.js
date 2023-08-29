@@ -15,7 +15,7 @@ import axiosReq from '../utils/axios-req'
 //登录
 export const loginReq = (subForm) => {
   return axiosReq({
-    url: '/user/login',
+    url: '/auth/login',
     data: subForm,
     method: 'post'
   })

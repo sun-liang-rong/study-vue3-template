@@ -75,6 +75,12 @@ export const constantRoutes = [
         component: () => import('@/views/role/authority/index.vue'),
         name: 'Authority',
         meta: { title: 'Authority'}
+      },
+      {
+        path:'refreshToken',
+        component:()=>import('@/views/role/refreshToken/index.vue'),
+        name:'RefreshToken',
+        meta:{title:'RefreshToken'}
       }
     ]
   },

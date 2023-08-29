@@ -105,7 +105,8 @@ const loginFunc = () => {
       .then(({ data }) => {
         console.log(data)
         elMessage('登录成功')
-        basicStore.setToken(data?.jwtToken)
+        basicStore.setToken(data?.accessToken)
+        basicStore.setRefreshToken(data?.refreshToken)
         router.push('/')
       })
       .catch((err) => {

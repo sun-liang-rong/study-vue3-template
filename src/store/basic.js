@@ -7,6 +7,7 @@ export const useBasicStore = defineStore('basic', {
     return {
       //user info
       token: '',
+      refreshToken: '',
       getUserInfo: false,
       userInfo: { username: '', avatar: '' },
       //router
@@ -27,7 +28,7 @@ export const useBasicStore = defineStore('basic', {
   },
   persist: {
     storage: localStorage,
-    paths: ['token']
+    paths: ['token','refreshToken']
   },
   actions: {
     remotePromiseArrByReqUrl(reqUrl) {
@@ -46,6 +47,9 @@ export const useBasicStore = defineStore('basic', {
     },
     setToken(data) {
       this.token = data
+    },
+    setRefreshToken(data) {
+      this.refreshToken = data
     },
     setFilterAsyncRoutes(routes) {
       this.$patch((state) => {
