@@ -9,7 +9,7 @@ export const  RefreshTokenReq = () => {
     method: 'post',
     baseURL: import.meta.env.VITE_PROXY_BASE_URL,
     headers: {
-      Authorization: 'Bearer ' + refreshToken
+      Authorization: `Bearer ${  refreshToken}`
     }
   })
 }

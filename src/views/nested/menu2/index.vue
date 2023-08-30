@@ -58,7 +58,7 @@ interface optionsTypes {
   value: string
 }
 import { reactive, ref } from 'vue'
-import { addRole, getRole, userList, getRoleList, addUserRole } from '@/api/user'
+import { addRole, addUserRole, getRole, getRoleList, userList } from '@/api/user'
 import { elMessage } from '@/hooks/use-element'
 import { ElMessageBox } from 'element-plus'
 const dialogVisible = ref(false)
@@ -77,7 +77,7 @@ const getAllRole = () => {
   options.length = 0
   getRoleList().then((res) => {
     console.log(res)
-    let list = [...res.data]
+    const list = [...res.data]
     list.forEach((item) => {
       options.push({
         label: item.name,

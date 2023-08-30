@@ -1,9 +1,9 @@
 <template>
   <el-button type="primary" @click="add">添加角色</el-button>
   <el-table :data="tableData" style="width: 100%">
-    <el-table-column prop="created_at" label="时间" width="180" />
-    <el-table-column prop="name" label="名称" width="180" />
-    <el-table-column prop="description" label="描述" />
+    <el-table-column prop="created_at" label="时间" align="center" />
+    <el-table-column prop="name" label="名称" align="center" />
+    <el-table-column prop="description" label="描述" align="center" />
   </el-table>
   <el-dialog v-model="dialogVisible" title="Tips" width="30%" :before-close="handleClose">
     <el-form :label-position="labelPosition" label-width="100px" :model="formLabelAlign" style="max-width: 460px">
