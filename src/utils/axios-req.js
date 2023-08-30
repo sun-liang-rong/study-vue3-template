@@ -42,7 +42,7 @@ service.interceptors.request.use(
     })
 
     //设置token到header
-    if (token) req.headers['Authorization'] = `Bearer ${  token}`
+    if (token) req.headers['Authorization'] = `Bearer ${token}`
     //如果req.method给get 请求参数设置为 ?name=xxx
     if ('get'.includes(req.method?.toLowerCase()) && !req.params) req.params = req.data
 
@@ -111,45 +111,48 @@ service.interceptors.response.use(
     if (loadingInstance) {
       loadingInstance && loadingInstance.close()
     }
-    if (err.response) {
-      const { codeStatus, message } = err.response.data
-      console.log(err.response, codeStatus, 'codeStatus')
-      if (codeStatus === 401) {
-        console.log('401')
-        // noAuthDill()
-        useBasicStore().setToken('')
-        return RefreshTokenReq().then(
-          async (res) => {
-            const originalRequest = err.config;
-            console.log(res, res.data.data.accessToken, 'res')
-            useBasicStore().setToken(res.data.data.accessToken)
-            //重新请求
-            console.log(resList, 'resList')
-            return service.request(originalRequest)
-        }
-        ).catch(
-          (err) => {
-            console.log(err, 'err')
-            noAuthDill()
-          })
+    //
+      if (err.response) {
+        const { codeStatus, message } = err.response.data
+        console.log(err.response, codeStatus, 'codeStatus')
+        if (codeStatus === 401) {
+          console.log('401')
+          // noAuthDill()
+          useBasicStore().setToken('')
+          return RefreshTokenReq().then(
+            async (res) => {
+              const originalRequest = err.config;
+              console.log(res, res.data.data.accessToken, 'res')
+              useBasicStore().setToken(res.data.data.accessToken)
+              //重新请求
+              console.log(resList, 'resList')
+              return service.request(originalRequest)
+            }
+          ).catch(
+            (err) => {
+              console.log(err, 'err')
+              if (authorTipDoor) {
+                noAuthDill()
+              }
+            })
 
-      } else if (codeStatus === 403) {
-        ElMessage.error({
-          message,
-          duration: 2 * 1000
-        })
+        } else if (codeStatus === 403) {
+          ElMessage.error({
+            message,
+            duration: 2 * 1000
+          })
+        } else {
+          ElMessage.error({
+            message: message || '请求失败',
+            duration: 2 * 1000
+          })
+        }
       } else {
         ElMessage.error({
-          message: message || '请求失败',
+          message: err.message || '请求失败',
           duration: 2 * 1000
         })
       }
-    } else {
-      ElMessage.error({
-        message: err.message || '请求失败',
-        duration: 2 * 1000
-      })
-    }
     return Promise.reject(err)
   }
 )
@@ -161,3 +164,5 @@ export default function axiosReq(config) {
     ...config
   })
 }
+
+// 写一个时间戳转换时间的函数

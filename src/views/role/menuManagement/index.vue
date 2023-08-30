@@ -5,15 +5,15 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import {reactive,toRefs} from "vue"
 import { useBasicStore } from '@/store/basic'
-import { refreshTokenReq } from "@/api/refreshTOken"
+// import { refreshTokenReq } from "@/api/refreshTOken"
 const add = () => {
-  refreshTokenReq().then((res) => {
-    console.log(res)
-    useBasicStore().setToken(res.data.accessToken)
-  })
+  // refreshTokenReq().then((res) => {
+  //   console.log(res)
+  //   useBasicStore().setToken(res.data.accessToken)
+  // })
 }
 </script>
 
